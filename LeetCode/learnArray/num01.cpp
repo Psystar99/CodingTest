@@ -1,3 +1,4 @@
+//너무 어렵게 풀었더. 멍청했다
 class Solution {
 public:
     int findMaxConsecutiveOnes(vector<int>& nums) {
