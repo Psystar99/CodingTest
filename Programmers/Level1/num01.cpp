@@ -5,7 +5,6 @@ using namespace std;
 //2차원배열의 덧셈
 vector<vector<int>> solution(vector<vector<int>> arr1, vector<vector<int>> arr2) {
     vector<vector<int>> answer(arr1.size(),vector <int>(arr1[0].size(),0));
-  cout<<arr1.size()<<" "<<arr1[0].size()<<endl;
     for(int i=0;i<arr1.size();i++){
         for(int j=0;j<arr1[i].size();j++){
 
