@@ -1,21 +1,27 @@
-//효율성 0점 받음!!!ㅠㅠㅠ다시 풀어야됨
+
+//
 #include <string>
 #include <vector>
 #include <iostream>
+#include <bits/stdc++.h> 
 using namespace std;
 
 string solution(vector<string> participant, vector<string> completion) {
     string answer = "";
+    sort(participant.begin(),participant.end());
+    sort(completion.begin(),completion.end());
     for(int i=participant.size()-1;i>=0;i--){
-            for(int j=completion.size()-1;j>=0;j--){
+        int flag=1;
+        for(int j=completion.size()-1;j>=0;j--){
         if(participant[i]==completion[j]){
-            participant.erase(participant.begin()+i);
-            
-            completion.erase(j+completion.begin());
-            break;
+           completion.erase(completion.begin()+j);
+           flag=0;
+           break;
         }
-                }
+        
     }
-    answer=participant[0];
-    return answer;
+   if(flag) answer= participant[i];
+   
+}
+     return answer;
 }
