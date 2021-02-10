@@ -1,5 +1,6 @@
 
-//
+
+//그냥 원래 코드,,,,vecotr sort만 하니까 바로됨 ㅠ...sort의 힘은 가히 대단했다
 #include <string>
 #include <vector>
 #include <iostream>
@@ -8,20 +9,18 @@ using namespace std;
 
 string solution(vector<string> participant, vector<string> completion) {
     string answer = "";
-    sort(participant.begin(),participant.end());
+        sort(participant.begin(),participant.end());
     sort(completion.begin(),completion.end());
     for(int i=participant.size()-1;i>=0;i--){
-        int flag=1;
-        for(int j=completion.size()-1;j>=0;j--){
+            for(int j=completion.size()-1;j>=0;j--){
         if(participant[i]==completion[j]){
-           completion.erase(completion.begin()+j);
-           flag=0;
-           break;
+            participant.erase(participant.begin()+i);
+            
+            completion.erase(j+completion.begin());
+            break;
         }
-        
+                }
     }
-   if(flag) answer= participant[i];
-   
-}
-     return answer;
+    answer=participant[0];
+    return answer;
 }
