@@ -1,61 +1,34 @@
 class Solution {
 public:
     int minOperations(vector<int>& nums) {
-       
+               // 앞으로 함수 호출은 절대 쓰지 말긔^^,,,
         int answer=0;
-        int mulMax=0;
-        int *re=new int[2];
+        int maxMul=0;
+        
         for(int i=0;i<nums.size();i++){
-            if(nums[i]==1) answer++;
-            else if(nums[i]!=0){
-            re=calcul(nums[i]);
-            answer+=re[0];
-            mulMax=max(mulMax,re[1]);
+            int num=nums[i];
+            int mul=0;
+            
+            if(num==1) answer+=1;
+            else if(num!=0){
+               while(1){
+                if(num==2){//2일때: breakpoint
+                    mul++;
+                    answer++;
+                    break;
+                }
+                if(num%2==0){//짝수일때: 곱하기 2연산 횟수 증가
+                    num/=2;
+                    mul++;
+                }else if(num%2==1){//홀수일때: 더하기 연산 횟수 증가
+                    num-=1;
+                    answer++;
+                }
+               }
+                maxMul=max(maxMul,mul);//곱하기 연산은 전체적으로 이뤄지기 때문에 가장 큰 값만 최종값에 더해줌
             }
         }
-        answer+=mulMax;
+        answer+=maxMul;
         return answer;
-    }
-    
-    map<int, int[2]> data;//0번째는 덧셈 수, 1번째는 곱셈수
-    
-    int *calcul(int num){//1이 넘어올리 절대 없음
-       
-        int plu=0;
-        int mul=0;
-        int *re=new int[2];
-        //map에 없던 수이면 계산해줘
-                if(data[num][0]!=0){
-                    re[0]=data[num][0];
-                    re[1]=data[num][1];
-                 //   cout<<num<<" ㅗ예있는거"<<endl;
-                 //   cout<<num<<"#"<<data[num][0]<<" /"<<data[num][1]<<endl;
-                    return re;
-                }else{
-                    data[num][0]=0;
-                    data[num][1]=0;
-                    if(num==2) {
-                        re[0]=1;
-                        re[1]=1;
-                        return re;}
-                    else if(num%2==1){ //홀수면: 마지노선 3
-                   //     cout<<"#"<<num<<" "<<endl;
-                        re=calcul(num-1);
-                        data[num][0]+=re[0]+1;
-                        data[num][1]+=re[1];
-                    //    cout<<num<<"가 데이터됐당"<<endl;
-                    }
-                    else if(num%2==0){//짝수면: 마지노선 2, 짝수고 2로 나눌 수 있어. 홀수든 짝수든 2에서 무조건 브레이크 해줘야됨
-                     //   cout<<"*"<<num<<" "<<endl;
-                        re=calcul(num/2);
-                        data[num][0]+=re[0];
-                        data[num][1]+=re[1]+1;
-                    //    cout<<num<<"가 데이터됐당"<<endl;
-                    }
-                }
-    
-          re[0]=data[num][0];
-          re[1]=data[num][1];
-          return re;
     }
 };
