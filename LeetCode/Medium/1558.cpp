@@ -25,10 +25,13 @@ public:
         int mul=0;
         int *re=new int[2];
         //map에 없던 수이면 계산해줘
-            //    if(data[num]!=NULL){
-             //       imsi=data[num];
-            //        return re;
-            //    }else{
+                if(data[num][0]!=0){
+                    re[0]=data[num][0];
+                    re[1]=data[num][1];
+                 //   cout<<num<<" ㅗ예있는거"<<endl;
+                 //   cout<<num<<"#"<<data[num][0]<<" /"<<data[num][1]<<endl;
+                    return re;
+                }else{
                     data[num][0]=0;
                     data[num][1]=0;
                     if(num==2) {
@@ -36,18 +39,23 @@ public:
                         re[1]=1;
                         return re;}
                     else if(num%2==1){ //홀수면: 마지노선 3
+                   //     cout<<"#"<<num<<" "<<endl;
                         re=calcul(num-1);
                         data[num][0]+=re[0]+1;
                         data[num][1]+=re[1];
+                    //    cout<<num<<"가 데이터됐당"<<endl;
                     }
                     else if(num%2==0){//짝수면: 마지노선 2, 짝수고 2로 나눌 수 있어. 홀수든 짝수든 2에서 무조건 브레이크 해줘야됨
+                     //   cout<<"*"<<num<<" "<<endl;
                         re=calcul(num/2);
                         data[num][0]+=re[0];
                         data[num][1]+=re[1]+1;
+                    //    cout<<num<<"가 데이터됐당"<<endl;
                     }
-            //    }
+                }
+    
           re[0]=data[num][0];
-        re[1]=data[num][1];
-        return re;
+          re[1]=data[num][1];
+          return re;
     }
 };
